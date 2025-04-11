@@ -2,7 +2,6 @@
 using Shop.Application.IServices;
 using Shop.Domain.Entities;
 using Shop.Domain.IRepository;
-using Shop.Domain.ValueObjects;
 
 namespace Shop.Infrastructure.Services
 {

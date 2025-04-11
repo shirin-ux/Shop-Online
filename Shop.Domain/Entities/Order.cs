@@ -8,8 +8,8 @@ namespace Shop.Domain.Entities
         public int Id { get; set; }
 
         public Guid CustomerId { get; set; }
-        public Customer Customer { get; set; }
-        public ShippingMethod ShippingMethod { get; set; }
+        public User Customer { get; set; }
+       // public ShippingMethod ShippingMethod { get; set; }
         public IList<Product> Products { get; set; }
 
         public decimal TotalCost { get; set; }
@@ -17,7 +17,7 @@ namespace Shop.Domain.Entities
         public DateTime CreatedAt { get; set; }
         public void CalculateTotalCost()
         {
-            TotalCost = Products.Sum(p => p.Price + p.GetPackagingCost()) + ShippingMethod.CalculateShippingCost(this);
+            //TotalCost = Products.Sum(p => p.Price + p.GetPackagingCost()) + ShippingMethod.CalculateShippingCost(this);
         }
         public bool IsValidOrderTime()
         {

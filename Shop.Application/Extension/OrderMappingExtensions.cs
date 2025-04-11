@@ -10,9 +10,9 @@ namespace Shop.Application.Extention
         {
             return new Order
             {
-                CustomerId = dto.CustomerId,
-                Products = dto.Products.Select(p => ProductFactory.CreateProduct(p.ProductType, p.Name, p.Price)).ToList(),
-                ShippingMethod = dto.ShippingMethod
+                //CustomerId = dto.CustomerId,
+                //Products = dto.Products.Select(p => ProductFactory.CreateProduct(p.ProductType, p.Name, p.Price)).ToList(),
+                //ShippingMethod = dto.ShippingMethod
             };
         }
     }

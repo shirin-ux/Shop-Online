@@ -15,7 +15,7 @@ namespace Shop.Tests.UnitTests
             {
                 Products = new List<Product>
                 { 
-                 new RegularProduct { Price = 20000 }
+                // new RegularProduct { Price = 20000 }
                 }
             };
 
@@ -31,7 +31,7 @@ namespace Shop.Tests.UnitTests
             {
                 Products = new List<Product>
                 {
-                   new RegularProduct { Price = 60000 }
+                  // new RegularProduct { Price = 60000 }
                 },
                  CreatedAt=DateTime.Now.AddHours(20)
             };

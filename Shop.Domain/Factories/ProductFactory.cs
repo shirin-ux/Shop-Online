@@ -14,11 +14,11 @@ namespace Shop.Domain.Factories
             {
                 return productType switch
                 {
-                    "Fragile" => new FragileProduct { Name = name, Price = price },
-                    "Regular" => new RegularProduct { Name = name, Price = price },
+                    //"Fragile" => new FragileProduct { Name = name, Price = price },
+                    //"Regular" => new RegularProduct { Name = name, Price = price },
                     _ => throw new ArgumentException("Invalid product type")
                 };
             }
         }
     }
-}
+

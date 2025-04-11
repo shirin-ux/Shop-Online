@@ -1,19 +1,15 @@
 ﻿namespace Shop.Domain.Entities
 {
-    public abstract class Product
+    public  class Product
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public decimal Price { get; set; }
-        public abstract decimal GetPackagingCost();
+        public int CategoryId { get; set; }
+        public Category Category { get; set; } = default!;
+        public Inventory Inventory { get; set; } = default!;
     }
-    public class RegularProduct : Product
-    {
-        public override decimal GetPackagingCost() => 0;
-    }
-    public class FragileProduct : Product
-    {
-        public override decimal GetPackagingCost() => 5000;
-    }
+
 
 }
