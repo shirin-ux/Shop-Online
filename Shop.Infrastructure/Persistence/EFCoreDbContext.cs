@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using Shop.Domain.Entities;
+using Shop.Domain.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Infrastructure.Persistence
 {
-    public class EFCoreDbContext : DbContext
+    public class EFCoreDbContext : DbContext, IApplicationDbContext 
     {
         public EFCoreDbContext(DbContextOptions<EFCoreDbContext> option) : base(option) { }
         public DbSet<Order> Orders { get; set; }
@@ -17,6 +19,12 @@ namespace Shop.Infrastructure.Persistence
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
+
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
