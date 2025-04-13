@@ -1,22 +1,21 @@
 ﻿using MediatR;
+using Shop.Domain.Entities;
 using Shop.Domain.Interface;
+using Shop.Domain.IRepository;
 
 namespace Shop.Application.Commands
 {
-    public class CreateProductHandler(IApplicationDbContext context) : IRequestHandler<CreateProductCommand, int>
+    public class CreateProductHandler(IProductRepository productRepository) : IRequestHandler<CreateProductCommand, int>
     {
-        private readonly IApplicationDbContext _context = context;
+        private readonly IProductRepository _productRepositorty= productRepository;
         public async Task<int> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var product = new Domain.Entities.Product
+         return await _productRepositorty.AddAsync(new Product()
             {
                 CategoryId = request.CategoryId,
                 Name = request.Name,
-                Price = request.Price
-            };
-            _context.Products.Add(product);
-            await _context.SaveChangesAsync(cancellationToken);
-            return product.Id;
+                 Price = request.Price
+            }, cancellationToken);
         }
     }
 }
