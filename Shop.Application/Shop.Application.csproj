@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="System.Globalization" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
