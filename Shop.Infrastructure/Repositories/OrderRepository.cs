@@ -1,4 +1,5 @@
-﻿using Shop.Domain.Entities;
+﻿using System.Runtime.InteropServices.ComTypes;
+using Shop.Domain.Entities;
 
 using Shop.Domain.IRepository;
 using Shop.Infrastructure.Persistence;
@@ -13,9 +14,22 @@ namespace Shop.Infrastructure.Repositories
             _dbContext = dbContext;
         }
   
-        public async Task AddAsync(Order order)
+        public async Task AddOrderWithOutboxAsync(Order order, OutboxMessage outBoxMessage)
         {
-            await _dbContext.AddAsync(order);
+            using var transaction = await _dbContext.Database.BeginTransactionAsync();
+
+            try
+            {
+
+                await _dbContext.Orders.AddAsync(order);
+                await _dbContext.OutboxMessages.AddAsync(outBoxMessage);
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
 

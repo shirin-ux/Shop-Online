@@ -1,5 +1,4 @@
-﻿
-using Shop.Domain.Entities;
+﻿using Shop.Domain.Entities;
 
 namespace Shop.Application.IServices
 {

@@ -20,6 +20,9 @@ namespace Shop.Infrastructure.Persistence
         public DbSet<Category> Categories { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
 
+        public DbSet<Vendor> Vendors { get; set; }
+
+        public DbSet<OutboxMessage>  OutboxMessages { get; set; }
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             return await base.SaveChangesAsync(cancellationToken);
@@ -41,6 +44,13 @@ namespace Shop.Infrastructure.Persistence
                .HasOne(x => x.Inventory)
                .WithOne(u => u.Product)
                .HasForeignKey<Inventory>(a => a.ProductId);
+
+
+            modelBuilder.Entity<Vendor>()
+                .HasMany(x => x.Products)
+                .WithOne(x => x.Vendor)
+                .HasForeignKey(x => x.VendorId);
+
         }
 
     }
