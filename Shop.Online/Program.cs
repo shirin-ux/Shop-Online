@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Application.IServices;
 using Shop.Domain.Interface;
 using Shop.Domain.IRepository;
+using Shop.Infrastructure;
+using Shop.Infrastructure.BackgroundService;
 using Shop.Infrastructure.ExternalServices;
 using Shop.Infrastructure.Persistence;
 using Shop.Infrastructure.Repositories;
@@ -28,13 +30,15 @@ builder.Services.AddApiVersioning(x =>
     o.GroupNameFormat = "v'V";
     o.SubstituteApiVersionInUrl = true;
 });
-
+builder.Services.Configure<KafkaSettings>(builder.Configuration.GetSection("Kafka"));
 builder.Services.AddScoped<IApplicationDbContext, EFCoreDbContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IPaymentStrategy, MellatPaymentStrategy>();
 builder.Services.AddScoped<IPaymentStrategy, SamanPaymentStrategy>();
 builder.Services.AddScoped<IPaymentStrategy, ZarinpalPaymentStrategy>();
 builder.Services.AddScoped<IPaymentStrategyFactory, PaymentStrategyFactory>();
+builder.Services.AddSingleton<KafkaProducerService>();
+builder.Services.AddHostedService<OutboxProcessorService>();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();

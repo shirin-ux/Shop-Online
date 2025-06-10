@@ -4,6 +4,6 @@ namespace Shop.Domain.IRepository
 {
     public interface IOrderRepository
     {
-        Task AddAsync(Order order);
+        Task AddOrderWithOutboxAsync(Order order,OutboxMessage outBoxMessage);
     }
 }

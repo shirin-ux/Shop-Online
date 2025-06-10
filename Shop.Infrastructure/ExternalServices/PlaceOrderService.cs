@@ -1,14 +1,17 @@
 ﻿
+using System.Text.Json;
 using Shop.Application.IServices;
 using Shop.Domain.Entities;
 using Shop.Domain.IRepository;
+using Shop.Infrastructure.ExternalServices;
 
 namespace Shop.Infrastructure.Services
 {
     public class PlaceOrderService : IPlaceOrderService
     {
         private readonly IOrderRepository _orderRepository;
-        public PlaceOrderService(IOrderRepository orderRepository)
+
+        public PlaceOrderService(IOrderRepository orderRepository, KafkaProducerService kafka)
         {
             _orderRepository = orderRepository;
         }
@@ -23,7 +26,14 @@ namespace Shop.Infrastructure.Services
                 throw new InvalidOperationException("سفارش فقط در بازه زمانی 8 صبح تا 7 عصر قابل ثبت است.");
             }
             order.CalculateTotalCost();
-            await _orderRepository.AddAsync(order);
+            var outBoxMessage = new OutboxMessage()
+            {
+                Id = Guid.NewGuid(),
+                AggregateId = order.Id,
+                Payload = JsonSerializer.Serialize(order),
+                CreatedAt = DateTime.Now
+            };
+            await _orderRepository.AddOrderWithOutboxAsync(order,outBoxMessage);
         }
     }
 }

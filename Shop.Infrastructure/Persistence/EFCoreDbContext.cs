@@ -22,6 +22,7 @@ namespace Shop.Infrastructure.Persistence
 
         public DbSet<Vendor> Vendors { get; set; }
 
+        public DbSet<OutboxMessage>  OutboxMessages { get; set; }
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             return await base.SaveChangesAsync(cancellationToken);

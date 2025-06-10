@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Application.DTOs;
 using Shop.Application.Extention;
 using Shop.Application.IServices;
+using Shop.Infrastructure.ExternalServices;
 
 
 namespace Shop.Online.V1.Controllers
@@ -13,9 +14,11 @@ namespace Shop.Online.V1.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IPlaceOrderService _placeOrderService;
+       
         public OrderController(IPlaceOrderService placeOrderService)
         {
             _placeOrderService = placeOrderService;
+       
         }
 
         [HttpPost]
