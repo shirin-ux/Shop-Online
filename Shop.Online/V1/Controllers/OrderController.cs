@@ -8,9 +8,10 @@ using Shop.Infrastructure.ExternalServices;
 
 namespace Shop.Online.V1.Controllers
 {
-    [Route("api/[controller]")]
+
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    [ApiVersion("1")]
+    [ApiVersion("1.0")]
     public class OrderController : ControllerBase
     {
         private readonly IPlaceOrderService _placeOrderService;
