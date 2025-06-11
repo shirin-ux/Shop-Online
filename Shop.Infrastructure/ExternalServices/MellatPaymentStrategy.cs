@@ -13,9 +13,9 @@ namespace Shop.Infrastructure.ExternalServices
     {
         public PaymentGateway Gateway => PaymentGateway.Mellat;
 
-        public Task<PaymentRequest> PayAsync(PaymentRequest request)
+        public PaymentRequest Pay(decimal amount)
         {
-            throw new NotImplementedException();
+            return  new PaymentRequest() { IsSuccess = true, Gateway = "Mellat" };
         }
     }
 }

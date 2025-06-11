@@ -8,7 +8,7 @@ namespace Shop.Infrastructure.ExternalServices
     {
         public PaymentGateway Gateway => PaymentGateway.Zarinpal;
 
-        public async Task<PaymentRequest> PayAsync(PaymentRequest request)
+        public PaymentRequest Pay(decimal amount)
         {
             
             return new PaymentRequest { IsSuccess = true, Gateway = "Zarinpal" };

@@ -11,6 +11,6 @@ namespace Shop.Application.IServices
     public interface IPaymentStrategy
     {
         PaymentGateway Gateway { get; }
-        Task<PaymentRequest> PayAsync(PaymentRequest request); // برای استراتیژی ها 
+        PaymentRequest Pay(decimal amount); 
     }
 }
