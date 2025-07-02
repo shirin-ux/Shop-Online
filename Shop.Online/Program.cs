@@ -19,16 +19,18 @@ builder.Services.AddControllers();
 
 builder.Services.AddApiVersioning(x =>
 {
-    x.DefaultApiVersion = new ApiVersion(1);
+    x.DefaultApiVersion = new ApiVersion(1, 0);
     x.ReportApiVersions = true;
     x.AssumeDefaultVersionWhenUnspecified = true;
     x.ApiVersionReader = ApiVersionReader.Combine(
         new UrlSegmentApiVersionReader(),
         new HeaderApiVersionReader("X-Api-Version"));
-}).AddApiExplorer(o =>
+}).AddApiExplorer()
+.AddMvc()
+.AddApiExplorer(options =>
 {
-    o.GroupNameFormat = "v'V";
-    o.SubstituteApiVersionInUrl = true;
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
 });
 builder.Services.Configure<KafkaSettings>(builder.Configuration.GetSection("Kafka"));
 builder.Services.AddScoped<IApplicationDbContext, EFCoreDbContext>();
