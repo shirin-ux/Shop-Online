@@ -11,7 +11,7 @@ namespace Shop.Infrastructure.Services
     {
         private readonly IOrderRepository _orderRepository;
 
-        public PlaceOrderService(IOrderRepository orderRepository, KafkaProducerService kafka)
+        public PlaceOrderService(IOrderRepository orderRepository)//, KafkaProducerService kafka)
         {
             _orderRepository = orderRepository;
         }
