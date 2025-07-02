@@ -19,7 +19,7 @@ namespace Shop.Tests.UnitTests
                 }
             };
 
-            var service = new PlaceOrderService(new Mock<IOrderRepository>().Object,);
+            var service = new PlaceOrderService(new Mock<IOrderRepository>().Object);
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () => await service.PlaceOrder(order));
         }
