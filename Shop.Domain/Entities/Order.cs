@@ -21,7 +21,7 @@ namespace Shop.Domain.Entities
         }
         public bool IsValidOrderTime()
         {
-            var now = DateTime.Now.TimeOfDay;
+            var now = CreatedAt.TimeOfDay;
             return now >= TimeSpan.FromHours(8) && now <= TimeSpan.FromHours(19);
         }
         public void AddProduct(Product product)
