@@ -16,18 +16,18 @@ namespace Shop.Infrastructure.Repositories
 
         public async Task AddOrderWithOutboxAsync(Order order, OutboxMessage outBoxMessage)
         {
-          //  using var transaction = await _dbContext.Database.BeginTransactionAsync();
+            await using var transaction = await _dbContext.Database.BeginTransactionAsync();
 
             try
             {
 
-                //await _dbContext.Orders.AddAsync(order);
-               // await _dbContext.OutboxMessages.AddAsync(outBoxMessage);
+                await _dbContext.Orders.AddAsync(order);
+                await _dbContext.OutboxMessages.AddAsync(outBoxMessage);
                 await _dbContext.SaveChangesAsync();
             }
             catch (Exception e)
             {
-                //await transaction.RollbackAsync();
+                await transaction.RollbackAsync();
                 throw;
             }
         }
