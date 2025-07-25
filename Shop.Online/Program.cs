@@ -11,7 +11,7 @@ using Shop.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//Add services to the container.
 builder.Services.AddDbContext<EFCoreDbContext>(Options =>
 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -41,6 +41,9 @@ builder.Services.AddScoped<IPaymentStrategy, ZarinpalPaymentStrategy>();
 builder.Services.AddScoped<IPaymentStrategyFactory, PaymentStrategyFactory>();
 builder.Services.AddSingleton<KafkaProducerService>();
 builder.Services.AddHostedService<OutboxProcessorService>();
+builder.Services.AddSingleton<ISingletonService, OperationService>();
+builder.Services.AddScoped<IScopedService, OperationService>();
+builder.Services.AddTransient<ITransientService, OperationService>();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();

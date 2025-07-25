@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Infrastructure.Persistence
 {
-    public class EFCoreDbContext : DbContext, IApplicationDbContext 
+    public class EFCoreDbContext : DbContext,IApplicationDbContext 
     {
         public EFCoreDbContext(DbContextOptions<EFCoreDbContext> option) : base(option) { }
         public DbSet<Order> Orders { get; set; }
@@ -22,7 +22,9 @@ namespace Shop.Infrastructure.Persistence
 
         public DbSet<Vendor> Vendors { get; set; }
 
-        public DbSet<OutboxMessage>  OutboxMessages { get; set; }
+        public DbSet<OutboxMessage> OutboxMessages { get; set; }
+
+
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             return await base.SaveChangesAsync(cancellationToken);
@@ -47,6 +49,7 @@ namespace Shop.Infrastructure.Persistence
 
 
             modelBuilder.Entity<Vendor>()
+
                 .HasMany(x => x.Products)
                 .WithOne(x => x.Vendor)
                 .HasForeignKey(x => x.VendorId);

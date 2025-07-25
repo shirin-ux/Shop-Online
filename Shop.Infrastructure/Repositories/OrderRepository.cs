@@ -13,10 +13,10 @@ namespace Shop.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-  
+
         public async Task AddOrderWithOutboxAsync(Order order, OutboxMessage outBoxMessage)
         {
-            using var transaction = await _dbContext.Database.BeginTransactionAsync();
+            await using var transaction = await _dbContext.Database.BeginTransactionAsync();
 
             try
             {
