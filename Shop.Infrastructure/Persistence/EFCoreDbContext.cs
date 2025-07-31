@@ -1,12 +1,7 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿
 using Microsoft.EntityFrameworkCore;
 using Shop.Domain.Entities;
 using Shop.Domain.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.Infrastructure.Persistence
 {
@@ -23,7 +18,7 @@ namespace Shop.Infrastructure.Persistence
         public DbSet<Vendor> Vendors { get; set; }
 
         public DbSet<OutboxMessage> OutboxMessages { get; set; }
-
+        public DbSet<RefreshToken> RefreshToken { get; set; }
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
@@ -54,6 +49,10 @@ namespace Shop.Infrastructure.Persistence
                 .WithOne(x => x.Vendor)
                 .HasForeignKey(x => x.VendorId);
 
+            modelBuilder.Entity<User>()
+               .HasOne(x => x.RefreshToken)
+               .WithOne(u => u.user)
+               .HasForeignKey<RefreshToken>(a => a.UserId);
         }
 
     }

@@ -9,7 +9,7 @@ namespace Shop.Application.IServices
 {
     public interface ITokenService
     {
-       string GenerateTokenAccess(UserDto userDto);
-       string GenerateRefreshToken();
+       AccessTokenResultDto GenerateTokenAccess(UserDto userDto);
+       Task<string> GenerateRefreshToken(UserDto user,string jwtId);
     }
 }

@@ -10,7 +10,7 @@ namespace Shop.Domain.Entities
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
         public string Role { get; set; }
-
+        public RefreshToken RefreshToken { get; set; }
         public ICollection<Address> Addresses { get; set; }
 
         public ICollection<Order> Orders { get; set; }

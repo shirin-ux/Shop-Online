@@ -5,7 +5,7 @@ namespace Shop.Domain.Entities
 {
     public class Order
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public Guid CustomerId { get; set; }
         public User Customer { get; set; }

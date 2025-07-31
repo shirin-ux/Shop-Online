@@ -10,7 +10,7 @@ namespace Shop.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        public Guid AggregateId { get; set; }
+        public int AggregateId { get; set; }
 
         public string Type { get; set; }
 
