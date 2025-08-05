@@ -19,6 +19,9 @@ namespace Shop.Infrastructure.Persistence
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
+        public DbSet<ProductImage> ProductImage { get; set; }
+        public DbSet<ProductFeature> ProductFeature { get; set; }
+        public DbSet<Brand> Brand { get; set; }
 
         public DbSet<Vendor> Vendors { get; set; }
 
